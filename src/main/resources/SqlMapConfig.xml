@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--    配置环境-->
+    <environments default="mysql">
+<!--        配置MySQL环境-->
+        <environment id="mysql">
+<!--            配置事务类型-->
+            <transactionManager type="JDBC"></transactionManager>
+<!--            配置数据源（连接池）-->
+            <dataSource type="PPOLED">
+<!--                配置连接数据库的基本信息-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mytest"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/magic/dao/IUserDAO.xml"/>
+    </mappers>
+</configuration>
+
+<!--
+ 环境搭建：
+第一步：创建maven工程并导入坐标
+第二步：创建实体类和dao的接口
+第三步：创建mybatis主配置文件SqlMapConfig.xml
+第四步：创建映射配置文件IUserDAO.xml
+
+注意事项：
+1.创建IUserDAO.xml和IUserDAO.java名称是为了和我们之前保持一致，在mybatis中它把持久层的操作接口名称和映射文件也叫作Mapper,
+IUserDAO和IUserMapper是一样的；
+2.在idea中创建目录的时候，它和包是不一样的，包com.magic.dao是三级结构，目录com/magic/dao这样才是三级结构，否则为一级结构
+3.mybatis的映射配置文件位置必须和dao接口的包结构相同；
+4.映射配置文件的mapper标签namespace属性的取值必须是dao接口的全限定类名；
+5.映射配置文件的操作配置（select），id属性取值必须是dao接口的方法名。
+
+ -->
